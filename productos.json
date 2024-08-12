@@ -1,0 +1,22 @@
+{
+    "productoElectronico": {
+        "1": {
+            "codigo": "1",
+            "nombre": "1",
+            "precio": 1.0,
+            "stock": 2,
+            "proveedor": "1",
+            "meses_garantia": "1"
+        }
+    },
+    "productoAlimenticio": {
+        "1": {
+            "codigo": "1",
+            "nombre": "1",
+            "precio": 1.0,
+            "stock": 1,
+            "proveedor": "1",
+            "fecha_vencimiento": "1"
+        }
+    }
+}

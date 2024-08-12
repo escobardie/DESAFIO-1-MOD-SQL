@@ -1,0 +1,38 @@
+{
+    "productoElectronico": {
+        "26265265":{
+            "codigo":26265265,
+            "nombre":"TV",
+            "precio": 250005,
+            "stock": 6,
+            "proveedor":"LG",
+            "MesGarantia":6
+        },
+        "24567543":{
+            "codigo":24567543,
+            "nombre":"HORNO",
+            "precio": 250005,
+            "stock": 6, 
+            "proveedor":"ARG",
+            "MesGarantia":6
+        }
+    },
+    "productoAlimenticio":{
+        "26265265":{
+            "codigo":26265265,
+            "nombre":"arroz",
+            "precio": 250005,
+            "stock": 6,
+            "proveedor":"Marolio",
+            "fecha_vencimiento": "27/10/2024"
+        },
+        "24567543":{
+            "codigo":24567543,
+            "nombre":"fideo",
+            "precio": 250005,
+            "stock": 6, 
+            "proveedor":"marolio",
+            "fecha_vencimiento": "27/10/2024"
+        }
+    }
+}
