@@ -1,0 +1,27 @@
+** instalamo entorno virtual: 
+virtualenv venv 
+ 
+** activamos entorno virtula: 
+.\venv\Scripts\activate
+
+** desactivamos el entorno: 
+deactivate
+
+** realizamos instalaciones:
+pip install *nombre del programa*
+** (ejemplo:  pip install mysql-connector-python )
+
+** realizamos desinstalacion:
+pip uninstall *nombre programa*
+(ejemplo: pip uninstall python-dotenv)
+
+** para cargar las librerias en un txt
+pip freeze > requirements.txt
+
+** instalamos las librerias que estan dentro de requirements.txt: 
+pip install -r .\requirements.txt
+
+** lista de lo instalado en pip: 
+pip list
+pip freeze
+

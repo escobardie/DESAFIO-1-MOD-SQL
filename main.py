@@ -2,7 +2,7 @@
 import os
 import platform
 from time import sleep
-from Sistema_Gestio_Producto import ProductoAlimento, ProductoElectronico, CRUDProductos
+from Sistema_Gestio_Producto import ProductoAlimenticio, ProductoElectronico, CRUDProductos
 
 ###################### LIMPIA PANTALLA ######################
 # Para Unix/Linux/MacOS/BSD
@@ -14,11 +14,12 @@ from Sistema_Gestio_Producto import ProductoAlimento, ProductoElectronico, CRUDP
 
 
 def limpiar_pantalla():
-    ''' Limpiar la pantalla según el sistema operativo'''
-    if platform.system() == 'Windows':
-        os.system('cls')
-    else:
-        os.system('clear') # Para Linux/Unix/MacOs
+    print("limpiado.")
+    # ''' Limpiar la pantalla según el sistema operativo'''
+    # if platform.system() == 'Windows':
+    #     os.system('cls')
+    # else:
+    #     os.system('clear') # Para Linux/Unix/MacOs
 
 ################## ESPERA Y LIMPIEZA #######################
 
@@ -85,23 +86,30 @@ def menu_categoria():
 def agregar_producto(control_productos, categoria):
     try:
         
-        codigo = input('Ingrese CODIG: ')
-        nombre = input('Ingrese NOMBRE: ')
-        precio = float(input('Ingrese PRECIO: '))
-        stock = int(input('Ingrese Cantidad de STOCK: ') )
-        proveedor = input('Ingrese PROVEEDOR: ')
-        
-        if categoria == 'productoElectronico':
-            meses_garantia = input('Ingrese Meses de Garantia: ')
-            producto = ProductoElectronico(codigo, nombre, precio,  stock, proveedor, meses_garantia)
-        elif categoria == 'productoAlimenticio':
-            fecha_vencimiento = input('Ingrese Fecha de Vencimiento DD/MM/AAAA: ')
-            producto = ProductoAlimento(codigo, nombre, precio,  stock, proveedor, fecha_vencimiento)
+        codigo = input('Ingrese CODIGO: ')
+        producto_info = control_productos.leer_producto(codigo, categoria)
+        if producto_info:
+            print("PRODUCTO YA EXISTENTE:")
+            print(producto_info)
+            input('ENTER para continuar...')
+            return
         else:
-            print("OCURRIO UN ERROR !ENTRO POR ACA!.")
+            nombre = input('Ingrese NOMBRE: ')
+            precio = float(input('Ingrese PRECIO: '))
+            stock = int(input('Ingrese Cantidad de STOCK: ') )
+            proveedor = input('Ingrese PROVEEDOR: ')
+            
+            if categoria == 'productoElectronico':
+                meses_garantia = input('Ingrese Meses de Garantia: ')
+                producto = ProductoElectronico(codigo, nombre, precio,  stock, proveedor, meses_garantia)
+            elif categoria == 'productoAlimenticio':
+                fecha_vencimiento = input('Ingrese Fecha de Vencimiento DD/MM/AAAA: ')
+                producto = ProductoAlimenticio(codigo, nombre, precio,  stock, proveedor, fecha_vencimiento)
+            else:
+                print("OCURRIO UN ERROR !ENTRO POR ACA!.")
 
-        control_productos.crear_producto(producto, categoria)
-        input('ENTER para continuar...')
+            control_productos.crear_producto(producto, categoria)
+            input('ENTER para continuar...')
        
 
     except Exception as error: #TODO HAY QUE SER MAS CLAROS CON LOS TIPOS DE ERRORES
@@ -109,7 +117,12 @@ def agregar_producto(control_productos, categoria):
 
 def buscar_producto_por_codigo(control_productos, categoria):
     codigo = input('Ingrese el CODIGO del PRODUCTO: ')
-    control_productos.leer_producto(codigo, categoria)
+    producto_info = control_productos.leer_producto(codigo, categoria)
+
+    if producto_info:
+        print(producto_info)
+    else:
+        print("PRODUCTO NO ENCONTRADO.")
     input('Presione enter para continuar...')
 
 def actualizar_stock(control_productos, categoria):
@@ -126,19 +139,20 @@ def mostrar_todos_los_productos(control_productos):
     print('=============== Listado completo de los PRODUCTOS =============== ')
     #producto = control_productos.leer_datos()#ORIGINAL
     #for categoria, productos in producto.items(): #ORIGINAL
-    for categoria, productos in control_productos.leer_datos().items():
-        print(f"Categoría: {categoria}")
-        for producto_id, detalles in productos.items():
-            print(f"  Producto ID: {producto_id}")
-            for key, value in detalles.items():
-                print(f"    {key}: {value}")
+    base_datos = control_productos.motrar_todos_productos()
+    # print(productos)
+    for Categoria, valor in base_datos.items():
+        print(f"- - {Categoria}: - -")
+        for producto in valor:
+            for clave, valor in producto.items():
+                print(f"{clave.capitalize()}: {valor}")
+            print("-" * 30)
     print('================================================================== ')
     input('Presione enter para continuar...')
 
 
 if __name__ == "__main__":
-    # json_productos = 'productos_db.json'
-    # control_productos = CRUDProductos(json_productos)
+
     control_productos = CRUDProductos()
 
     while True:
@@ -167,7 +181,7 @@ if __name__ == "__main__":
             break
         
         else: # NO VALIDO
-            system(limpiar)
+            limpiar_pantalla()
             print('Opción no válida. Por favor, seleccione una opción válida (1-7)')
             
         
