@@ -110,8 +110,11 @@ CREATE TABLE productoAlimenticio (
     PRIMARY KEY(codigo)
 );
 
-SELECT * FROM PRODUCTO;
+
 SELECT * FROM productoElectronico;
 SELECT * FROM productoAlimenticio;
 
 DROP TABLE PRODUCTO;
+
+
+update productoElectronico set stock = stock + 2 where codigo = 00; 
