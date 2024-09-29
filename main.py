@@ -103,7 +103,7 @@ def agregar_producto(control_productos, categoria):
                 meses_garantia = input('Ingrese Meses de Garantia: ')
                 producto = ProductoElectronico(codigo, nombre, precio,  stock, proveedor, meses_garantia)
             elif categoria == 'productoAlimenticio':
-                fecha_vencimiento = input('Ingrese Fecha de Vencimiento DD/MM/AAAA: ')
+                fecha_vencimiento = input('Ingrese Fecha de Vencimiento MM/AAAA: ')
                 producto = ProductoAlimenticio(codigo, nombre, precio,  stock, proveedor, fecha_vencimiento)
             else:
                 print("OCURRIO UN ERROR !ENTRO POR ACA!.")
